@@ -15,6 +15,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        
+        if let _ = UserDefaults.standard.value(forKey: "token") {
+            // Navigate to Web view controller
+            let homeViewController = mainStoryboard.instantiateViewController(identifier: "WebViewController")
+            UIApplication.shared.windows.first?.rootViewController = homeViewController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        } else {
+            // Navigate to login view controller
+            let homeViewController = mainStoryboard.instantiateViewController(identifier: "LoginViewController")
+            UIApplication.shared.windows.first?.rootViewController = homeViewController
+            UIApplication.shared.windows.first?.makeKeyAndVisible()
+        }
         return true
     }
 
